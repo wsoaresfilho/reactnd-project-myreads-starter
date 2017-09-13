@@ -172,3 +172,13 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+/* custom styles */
+.book-shelf-changer:hover {
+  background-color: #03a9f4;
+}
+
+.book-cover {
+  background-repeat-y: no-repeat;
+  background-position: center;
+}

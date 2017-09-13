@@ -3,28 +3,15 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Bookshelf from './Bookshelf'
 
-const bookshelves = [
-  {
-    "title": "Currently Reading",
-    "type": "currentlyReading"
-  },
-  {
-    "title": "Want to Read",
-    "type": "wantToRead"
-  },
-  {
-    "title": "Read",
-    "type": "read"
-  }
-]
-
 class ListBooks extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    bookshelves: PropTypes.array.isRequired,
+    books: PropTypes.array.isRequired,
+    onChangeShelf: PropTypes.func.isRequired
   }
 
   render() {
-    const { books } = this.props
+    const { bookshelves, books, onChangeShelf } = this.props
 
     return (
       <div className="list-books">
@@ -34,7 +21,12 @@ class ListBooks extends Component {
         <div className="list-books-content">
           <div>
             {bookshelves.map((bookshelf) => (
-              <Bookshelf key={bookshelf.type} title={bookshelf.title} books={books.filter((book) => book.shelf === bookshelf.type)} />
+              <Bookshelf 
+                key={bookshelf.type} 
+                title={bookshelf.title} 
+                categories={bookshelves} 
+                onChangeShelf={onChangeShelf}
+                books={books.filter((book) => book.shelf === bookshelf.type)} />
             ))}
           </div>
         </div>
