@@ -2,7 +2,7 @@
 
 This is my project for Udacity's React Fundamentals course. I hope you enjoy it!
 
-## TL;DR
+## Instructions
 
 For installing and launching the project:
 
