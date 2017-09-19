@@ -26,6 +26,9 @@ class SearchBooks extends Component {
 
     return (
       <div className="search-books">
+        <div className="list-books-title">
+          <h1>MyReads: Search</h1>
+        </div>
         <div className="search-books-bar">
           <Link className="close-search" to="/" >Close</Link>
           <div className="search-books-input-wrapper">

@@ -65,7 +65,6 @@ body, .app {
 /* search page */
 
 .search-books-bar {
-  position: fixed;
   width: 100%;
   top: 0;
   left: 0;
@@ -85,7 +84,8 @@ body, .app {
   outline: none;
 }
 
-.close-search {
+.close-search,
+.back-link {
   display: block;
   top: 20px;
   left: 15px;
@@ -175,10 +175,55 @@ body, .app {
 
 /* custom styles */
 .book-shelf-changer:hover {
-  background-color: #03a9f4;
+  background-color: #2e7d32;
 }
 
 .book-cover {
-  background-repeat-y: no-repeat;
+  background-repeat: no-repeat;
   background-position: center;
+}
+
+.book-shelf-changer select option:checked {
+  font-weight: bold;
+}
+
+.book-shelf-changer select option:disabled {
+  background-color: lightgray;
+}
+
+.book-details-infos {
+  height: 100%;
+  padding: 0;
+  margin: 0 0 50px 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-lines {
+  padding: 5px;
+  max-width: 600px;
+}
+
+.info-lines label {
+  padding-right: 10px;
+  color: #345b36;
+  font-weight: bold;
+}
+
+.book-image {
+  width: auto;
+  margin: auto;
+  display: block;
+  margin-bottom: 20px;
+  box-shadow: 10px 10px 5px #888888;
+}
+
+.description {
+  font-size: 0.7em;
+  text-align: justify;
 }

@@ -2,7 +2,9 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import ListBooks from './ListBooks'
 import SearchBooks from './SearchBooks'
+import BookDetails from './BookDetails'
 import * as BooksAPI from './BooksAPI'
+import sortBy from 'sort-by'
 import './App.css'
 
 const bookshelvesList = [
@@ -50,7 +52,6 @@ class BooksApp extends React.Component {
       this.updateBooksList(book, shelf)
     } else {
       BooksAPI.get(book.id).then((newBook) => {
-        //this.setState({ booksUserList: newBooksList })
         this.setState((prevState) => ({
           booksUserList: prevState.booksUserList.concat(newBook)
         }))
@@ -86,16 +87,20 @@ class BooksApp extends React.Component {
           <SearchBooks 
             bookshelves={bookshelvesList} 
             onChangeShelf={this.onSelectCategory}
-            booksApiList={this.state.booksApiList}
+            booksApiList={this.state.booksApiList.sort(sortBy('title'))}
             searchBooks={this.searchBooks} />
         )}/>
 
         <Route exact path='/' render={() => (       
           <ListBooks 
             bookshelves={bookshelvesList} 
-            books={this.state.booksUserList}
+            books={this.state.booksUserList.sort(sortBy('title'))}
             onChangeShelf={this.onSelectCategory} />
         )}/>
+
+        <Route path='/book/:id' render={({match}) => (
+          <BookDetails bookId={ match.params.id } /> 
+        )} />
       </div>
     )
   }

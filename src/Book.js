@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 export default class Book extends Component {
   static propTypes = {
@@ -20,12 +21,17 @@ export default class Book extends Component {
   render() {
     const { book, categories } = this.props
 
-    let bckImg = book.imageLinks && book.imageLinks.thumbnail ? "url("+book.imageLinks.thumbnail+")" : ""
+    const bckImg = book.imageLinks && book.imageLinks.thumbnail ? "url("+book.imageLinks.thumbnail+")" : ""
 
     return (
       <div className="book">
-        <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: bckImg }}></div>
+        <div className="book-top">          
+          <Link to={{
+            pathname: `/book/${book.id}`,
+            search: `?prev=${window.location.pathname}`
+          }} >
+            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: bckImg }}></div>
+          </Link>
           <div className="book-shelf-changer">
             <select value={this.state.category} onChange={this.onChangeOption}>
               <option value="" disabled>Move to...</option>
