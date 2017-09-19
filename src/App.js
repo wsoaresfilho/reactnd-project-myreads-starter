@@ -43,6 +43,7 @@ class BooksApp extends React.Component {
         return b
       })
       this.setState({ booksUserList: newBooksList })
+      this.updateApiList(this.state.booksApiList)
     })
   }
     
@@ -60,22 +61,26 @@ class BooksApp extends React.Component {
     }      
   }
 
+  updateApiList = (books) => {
+    const booksApiListUpdated = books.map((book) => {
+      this.state.booksUserList.forEach((b) => {
+        if(book.id === b.id) {
+          book.shelf = b.shelf
+        } else if (!book.shelf) {
+          book.shelf = "none"
+        }
+      })
+      return book
+    })
+    this.setState({ booksApiList: booksApiListUpdated })
+  }
+
   searchBooks = (query) => {
     BooksAPI.search(query).then((books) => {
       if(!books || books.error) {
         this.setState({ booksApiList: [] })
       } else {
-        const booksApiListUpdated = books.map((book) => {
-          this.state.booksUserList.forEach((b) => {
-            if(book.id === b.id) {
-              book.shelf = b.shelf
-            } else {
-              book.shelf = "none"
-            }
-          })
-          return book
-        })
-        this.setState({ booksApiList: booksApiListUpdated })
+        this.updateApiList(books)
       }              
     })
   }
