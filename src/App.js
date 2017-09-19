@@ -35,16 +35,18 @@ class BooksApp extends React.Component {
   }
 
   updateBooksList = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(() => {
-      const newBooksList = this.state.booksUserList.map((b) => {
-        if(b.id === book.id) {
-          b.shelf = shelf
-        }
-        return b
+    if (book.shelf !== shelf) {
+      BooksAPI.update(book, shelf).then(() => {
+        const newBooksList = this.state.booksUserList.map((b) => {
+          if(b.id === book.id) {
+            b.shelf = shelf
+          }
+          return b
+        })
+        this.setState({ booksUserList: newBooksList })
+        this.updateApiList(this.state.booksApiList)
       })
-      this.setState({ booksUserList: newBooksList })
-      this.updateApiList(this.state.booksApiList)
-    })
+    }    
   }
     
 
